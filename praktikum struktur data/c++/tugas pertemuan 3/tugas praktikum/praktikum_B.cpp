@@ -1,4 +1,3 @@
-#include<stdio.h>
 #include<iostream>
 #include<conio.h>
 using namespace std;
@@ -26,7 +25,7 @@ int main ( )
  cout<<"Alamat : \n" ;
  cout<<"\tJalan : "; cin.getline ( Mhs.Alamat.Jaln, 40 ) ;
  cout<<"\tKota : "; cin.getline ( Mhs.Alamat.Kota, 50 ) ;
- cout<<"\tKode pos : "; cin.getline ( Mhs.Alamat.Pos, 5 ) ;
+ cout<<"\tKode pos : "; cin.getline ( Mhs.Alamat.Pos, 10 ) ;
  cout<<"Tanggal Lahir : \n";
  cout<<"\tTanggal : "; cin >>Mhs.Lahir.Tanggal ;
  cout<<"\tBulan : "; cin>>Mhs.Lahir.Bulan ;
