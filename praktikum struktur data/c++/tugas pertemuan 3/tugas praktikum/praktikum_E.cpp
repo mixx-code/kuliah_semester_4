@@ -19,7 +19,7 @@ int i;
     cout << "silahkan masukkan data pada form dibawah"<<endl;
 
     cout<<endl;
-    cout << "BERAPA DATA YANG AKAN DI MASUKKAN \t: ";
+    cout << "Jumlah Mahasiswa yang akan dimasukkan \t: ";
     cin >> jumlah_indexs;
     cout<<endl;
     cout<<endl;
@@ -27,7 +27,7 @@ int i;
     nilai nl[jumlah_indexs];
 
     for(i=0;i<jumlah_indexs;i++){
-
+    cout << "Mahasiswa ke -"<<i+1<<endl;
     cout << "masukkan NIM\t: ";
     gets(nl[i].NIM);
     cin.getline(nl[i].NIM,15);
@@ -55,7 +55,9 @@ int i;
     }
     }
 
-
+    cout<<endl;
+    cout << "Daftar Nilai Mahasiswa";
+    cout<<endl;
     cout << "NO\tNIM\t\tNAMA\t\tNILAI TUGAS\tNILAI UTS\tNILAI UAS\tNILAI AKHIR\tGRADE"<<endl;
     for(i=0;i<jumlah_indexs;i++){
         cout << endl;
