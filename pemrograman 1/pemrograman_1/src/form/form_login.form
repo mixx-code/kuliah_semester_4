@@ -128,11 +128,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="login"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnLoginActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="BtnLogout">
           <Properties>
             <Property name="text" type="java.lang.String" value="logout"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnLogoutActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
