@@ -3,7 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package form;
-
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.sql.*;
+import javax.swing.JOptionPane;
+import java.awt.event.KeyEvent;
+import pemrograman_1.ClassDatabase;
 /**
  *
  * @author rizki
@@ -47,8 +52,18 @@ public class form_login extends javax.swing.JFrame {
         jLabel3.setText("password");
 
         BtnLogin.setText("login");
+        BtnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnLoginActionPerformed(evt);
+            }
+        });
 
         BtnLogout.setText("logout");
+        BtnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnLogoutActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -110,6 +125,52 @@ public class form_login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BtnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLoginActionPerformed
+try {
+
+            Connection c = ClassDatabase.getkoneksi();
+            Statement s = c.createStatement();
+            String username = TxtUsername.getText();
+            String password = new String(TxtPassword.getPassword());
+            String sql = "Select * from login where username ='"+ username + "'";
+            ResultSet r = s.executeQuery(sql);
+
+
+            if(TxtUsername.getText().isEmpty()) 
+    {
+    JOptionPane.showMessageDialog(this, "Username Tidak Boleh Kosong !!!","MAAF",JOptionPane.YES_OPTION);
+   }
+    else{
+    if (TxtPassword.getText().isEmpty())
+    {
+        JOptionPane.showMessageDialog(this, "Password Tidak Boleh Kosong!!!","MAAF",JOptionPane.YES_OPTION);
+    }
+    else{
+            while (r.next()) {
+                String uname = r.getString("Username");
+                String pwd = r.getString("password");
+
+                if ((username.equals(uname)) && (password.equals(pwd))) {
+                    JOptionPane.showMessageDialog(this, "Login Anda Sukses","SELAMAT",JOptionPane.NO_OPTION);
+                    new MenuUtama().setVisible(true);
+                    this.setVisible(false);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Username atau Password Salah, Tolong Periksa Kembali!!!","MAAF",JOptionPane.YES_OPTION);
+                }
+            }}}
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnLoginActionPerformed
+
+    private void BtnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLogoutActionPerformed
+int ex = JOptionPane.showConfirmDialog(null, "Apakah anda akan keluar? ", "Anda yakin?",
+                JOptionPane.YES_NO_OPTION);
+        if (ex == 0) {
+            dispose();
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnLogoutActionPerformed
 
     /**
      * @param args the command line arguments
