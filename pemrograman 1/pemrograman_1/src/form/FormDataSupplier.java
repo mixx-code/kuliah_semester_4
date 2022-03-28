@@ -3,7 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package form;
-
+import pemrograman_1.ClassDatabase;
+import com.mysql.jdbc.PreparedStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.DecimalFormat;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import net.proteanit.sql.DbUtils;
 /**
  *
  * @author Rizki
@@ -32,16 +41,16 @@ public class FormDataSupplier extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        TxtKode = new javax.swing.JTextField();
-        TxtNama = new javax.swing.JTextField();
-        TxtNohp = new javax.swing.JTextField();
+        TxtKodesup = new javax.swing.JTextField();
+        TxtNamasup = new javax.swing.JTextField();
+        TxtNotelpsup = new javax.swing.JTextField();
         BtnAdd = new javax.swing.JButton();
         BtnSave = new javax.swing.JButton();
         BtnEdit = new javax.swing.JButton();
         BtnDelete = new javax.swing.JButton();
         BtnClose = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        TxtAlamat = new javax.swing.JTextArea();
+        TxtAlamatsup = new javax.swing.JTextArea();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TblSup = new javax.swing.JTable();
@@ -58,15 +67,20 @@ public class FormDataSupplier extends javax.swing.JInternalFrame {
 
         jLabel5.setText("No.Hp");
 
-        TxtKode.addActionListener(new java.awt.event.ActionListener() {
+        TxtKodesup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtKodeActionPerformed(evt);
+                TxtKodesupActionPerformed(evt);
             }
         });
 
         BtnAdd.setText("ADD");
 
         BtnSave.setText("Save");
+        BtnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSaveActionPerformed(evt);
+            }
+        });
 
         BtnEdit.setText("Edit");
 
@@ -74,9 +88,9 @@ public class FormDataSupplier extends javax.swing.JInternalFrame {
 
         BtnClose.setText("CLOSE");
 
-        TxtAlamat.setColumns(20);
-        TxtAlamat.setRows(5);
-        jScrollPane2.setViewportView(TxtAlamat);
+        TxtAlamatsup.setColumns(20);
+        TxtAlamatsup.setRows(5);
+        jScrollPane2.setViewportView(TxtAlamatsup);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -97,13 +111,13 @@ public class FormDataSupplier extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel4))
                                 .addGap(78, 78, 78)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(TxtNama)
+                                    .addComponent(TxtNamasup)
                                     .addComponent(jScrollPane2)
-                                    .addComponent(TxtKode)))
+                                    .addComponent(TxtKodesup)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addGap(78, 78, 78)
-                                .addComponent(TxtNohp, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(TxtNotelpsup, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(BtnAdd)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -124,11 +138,11 @@ public class FormDataSupplier extends javax.swing.JInternalFrame {
                 .addGap(47, 47, 47)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(TxtKode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TxtKodesup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(TxtNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TxtNamasup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
@@ -136,7 +150,7 @@ public class FormDataSupplier extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(TxtNohp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TxtNotelpsup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnClose)
@@ -202,9 +216,63 @@ public class FormDataSupplier extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void TxtKodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtKodeActionPerformed
+    private void TxtKodesupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtKodesupActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TxtKodeActionPerformed
+    }//GEN-LAST:event_TxtKodesupActionPerformed
+
+    private void BtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSaveActionPerformed
+String kodesup=this.TxtKodesup.getText();
+    String namasup=this.TxtNamasup.getText();
+    String alamatsup=this.TxtAlamatsup.getText();
+    String notelpsup=this.TxtNotelpsup.getText();
+     if(TxtKodesup.getText().isEmpty()) 
+    {
+    JOptionPane.showMessageDialog(this, "Data Belum Lengkap, Kode Supplier Tidak Boleh Kosong");
+   }
+    else{
+    if (TxtNamasup.getText().isEmpty())
+    {
+        JOptionPane.showMessageDialog(this, "Data Belum Lengkap, Nama Supplier Tidak Boleh Kosong");
+    }
+    else{
+    if (TxtAlamatsup.getText().isEmpty())
+    {
+        JOptionPane.showMessageDialog(this, "Data Belum Lengkap, Alamat Tidak Boleh Kosong");
+    }
+    else{
+    if (TxtNotelpsup.getText().isEmpty())
+    {
+        JOptionPane.showMessageDialog(this, "Data Belum Lengkap, Nomor Telp Tidak Boleh Kosong");
+    }   
+    else{
+    try {
+            Connection c=ClassDatabase.getkoneksi();
+            String sql = "Insert into supplier values (?,?,?,?)";
+            PreparedStatement p=(PreparedStatement) c.prepareStatement(sql);
+            p.setString(1, kodesup);
+            p.setString(2, namasup);  
+            p.setString(3, alamatsup);
+            p.setString(4, notelpsup);
+            p.executeUpdate();
+            p.close();
+            JOptionPane.showMessageDialog(this, "Sukses Tambah Data");
+    
+    
+        }catch(SQLException e){
+            System.out.println(e);
+        }finally{       
+    }}}}}
+      try {        
+        
+            Connection c=ClassDatabase.getkoneksi();
+            Statement s= c.createStatement();
+            String sql="select kodesup, namasup, alamatsup, notelpsup from supplier";
+            ResultSet r=s.executeQuery(sql);
+            TblSup.setModel(DbUtils.resultSetToTableModel(r));
+}catch (Exception e){
+JOptionPane.showMessageDialog(null, e);
+}        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnSaveActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -214,10 +282,10 @@ public class FormDataSupplier extends javax.swing.JInternalFrame {
     private javax.swing.JButton BtnEdit;
     private javax.swing.JButton BtnSave;
     private javax.swing.JTable TblSup;
-    private javax.swing.JTextArea TxtAlamat;
-    private javax.swing.JTextField TxtKode;
-    private javax.swing.JTextField TxtNama;
-    private javax.swing.JTextField TxtNohp;
+    private javax.swing.JTextArea TxtAlamatsup;
+    private javax.swing.JTextField TxtKodesup;
+    private javax.swing.JTextField TxtNamasup;
+    private javax.swing.JTextField TxtNotelpsup;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+
+=======
 #include <iostream>
 #include <conio.h>
 #include <stdio.h>
@@ -20,3 +23,4 @@ main()
     cout<<*( Nilai+i )<<" "; //mencetak elemen array
     getch();
 }
+>>>>>>> 8ed087b4cf1c913b8f4e53cced607e087671bfbc
