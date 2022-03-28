@@ -1,14 +1,21 @@
 #include <iostream>
 using namespace std;
 
-void KelilingPersegi()
+void LuasPersegi(int *panjang, int *lebar)
+
 {
- int panjang,lebar;
+ int a = &panjang;
+ int b = &lebar;
 
- cout << "Masukkan panjang  : "; cin >> panjang;
- cout << "Masukkan lebar    : "; cin >> lebar;
+ cout << "Masukkan panjang  : "; cin >> a;
+ cout << "Masukkan lebar    : "; cin >> b;
 
- cout<<"Keliling persegi: " << 2*(panjang+lebar);
+ tukar(&a,&b);
+
+ cout << "panjang   = "; cin >> a;
+ cout << "lebar     = "; cin >> b;
+
+ cout<<"Keliling persegi: " << panjang + lebar);
 }
 
 int main()
