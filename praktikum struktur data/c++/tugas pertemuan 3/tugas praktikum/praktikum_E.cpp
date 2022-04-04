@@ -63,6 +63,7 @@ int i;
         cout << endl;
         cout << i+1<<"\t"<<nl[i].NIM<<"\t"<<nl[i].nama<<"\t"<<nl[i].nilai_tugas<<"\t\t"<<nl[i].nilai_UTS<<"\t\t"<<nl[i].nilai_UAS<<"\t\t"<<nl[i].nilai_akhir<<"\t\t"<<nl[i].nilai_huruf<<endl;
     }
-
+    cout<<endl;
+    cout << nl;
 };
 

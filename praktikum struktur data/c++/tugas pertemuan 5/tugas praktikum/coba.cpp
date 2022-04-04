@@ -2,19 +2,24 @@
 #include <conio.h>
 using namespace std;
 
-void tukar(int *a, int *b);
+void tukar( string *a, string *b);
 
 main()
 {
-    int a=8, b=-5;
+     string a,b;
+    cout << "Masukkan username      : ";
+    cin >> a;
+    cout << "Masukkan password      : ";
+    cin >> b;
+    cout << endl;
     cout    << "nilai a dan b seblumnya        : " << a << " & " << b;
     tukar(&a,&b);
     cout    << "\nnilai a dan b setelah ditukar  : " << a << " & " << b;
     getch();
 }
-void tukar(int *x, int *y)
+void tukar( string *x, string *y)
 {
-    int z;
+    string z;
     z = *x;
     *x = *y;
     *y = z;
