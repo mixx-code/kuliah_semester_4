@@ -14,7 +14,7 @@ struct tanggal{
     char tahun[20];
 };
 struct BiodataPegawai{
-    char NIP[20];
+    char NIP[50];
     char nama[20];
     char jabatan[20];
     tinggal alamat;
@@ -39,7 +39,7 @@ int i;
     cout<<endl;
     cout << "Masukkan NIP \t\t\t: ";
     gets(BP[i].NIP);
-    cin.getline(BP[i].NIP,20);
+    cin.getline(BP[i].NIP,50);
     cout << "Masukkan Nama \t\t\t: ";
     cin.getline(BP[i].nama,20);
     cout << "Masukkan Jabatan \t\t: ";
@@ -75,44 +75,59 @@ int i;
     cout << "Masukkan Tahun \t\t\t: ";
     cin.getline(BP[i].mulai_kerja.tahun,20);
     cout<<endl;
- }
-    cout <<endl;
-    cout << "-------------------------------------------------------------------------------------------------------"<<endl;
-    cout << "-----------------------------------";
-    cout << "DATA PEGAWAI YANG TELAH DI MASUKKAN";
-    cout << "-----------------------------------"<<endl;
-    cout << "-------------------------------------------------------------------------------------------------------"<<endl;
-
-    cout <<endl;
- for(i=0;i<jumlah_indexs;i++){
+    }
+    cout <<endl <<endl;
+    cout << "======================================" <<endl;
+    cout << "            Biodata Pegawai           " <<endl;
+    cout << "            PT. Makmur KUY            " <<endl;
+    cout << "======================================" <<endl;
+    char carinip;
+    bool found;
+	//carinip -> untuk cari nip pegawai
+    cout << "Cari Pegawai (NIP) : "; cin >> carinip;
+    found = false;
+    i=0;
+    while ((i<jumlah_indexs)&(!found))
+        {
+            if (BP[i].NIP[i] == carinip)
+                found = true;
+                else
+                    i = i+1;
+        }
+	//kondisi nip ketemu
+    if (found)
+        {
+            cout <<endl;
     cout << "DATA PEGAWAI KE -"<<i+1<<endl;
     cout<<endl;
-    cout << "Masukkan NIP \t\t\t: " << BP[i].NIP<<endl;
-    cout << "Masukkan Nama \t\t\t: "<< BP[i].nama<<endl;
-    cout << "Masukkan Jabatan \t\t: "<< BP[i].jabatan<<endl;
+    cout << "NIP \t\t\t: " << BP[i].NIP<<endl;
+    cout << "Nama \t\t\t: "<< BP[i].nama<<endl;
+    cout << "Jabatan \t\t: "<< BP[i].jabatan<<endl;
     cout <<endl;
     //alamat
-    cout << "MASUKKAN ALAMAT PEGWAI"<<endl;
+    cout << "ALAMAT PEGWAI"<<endl;
     cout <<endl;
-    cout << "Masukkan Jalan \t\t\t: "<< BP[i].alamat.jalan<<endl;
-    cout << "Masukkan Kode POS \t\t: "<<BP[i].alamat.kode_pos<<endl;
-    cout << "Masukkan Kota \t\t\t: "<< BP[i].alamat.kota<<endl;
+    cout << "Jalan " <<  BP[i].alamat.jalan << " kota " <<  BP[i].alamat.kota << " kode pos " << BP[i].alamat.kode_pos << endl;
     cout <<endl;
     //tanggal lahir
-    cout << "MASUKKAN TANGGAL LAHIR PEGAWAI"<<endl;
+    cout << "TANGGAL LAHIR PEGAWAI"<<endl;
     cout <<endl;
-    cout << "Masukkan Tanggal \t\t: "<< BP[i].lahir.tgl<<endl;
-    cout << "Masukkan Bulan \t\t\t: "<< BP[i].lahir.bulan<<endl;
-    cout << "Masukkan Tahun \t\t\t: "<<BP[i].lahir.tahun<<endl;
+    cout << "\t" << BP[i].lahir.tgl << " " << BP[i].lahir.bulan << " " << BP[i].lahir.tahun << endl;
     cout <<endl;
     //tanggal mulai kerja
     cout << "MASUKKAN TANGGAL PEGAWAI MULAI KERJA"<<endl;
     cout <<endl;
-    cout << "Masukkan Tanggal \t\t: "<< BP[i].mulai_kerja.tgl<<endl;
-    cout << "Masukkan Bulan \t\t\t: "<< BP[i].mulai_kerja.bulan<<endl;
-    cout << "Masukkan Tahun \t\t\t: "<< BP[i].mulai_kerja.tahun<<endl;
+    cout << "\t" << BP[i].mulai_kerja.tgl << " " << BP[i].mulai_kerja.bulan << " " << BP[i].mulai_kerja.tahun << endl;
     cout<<endl;
- }
-return 0;
-}
+        }
+    else
+        {
+        cout <<"NIP [ ";
+        cout << carinip; cout << " ] Tidak Terdaftar!! ";
+        }
+        getch();
+    
+    
 
+    
+}
