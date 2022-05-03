@@ -67,6 +67,11 @@ public class FormDataSupplier extends javax.swing.JInternalFrame {
 
         jLabel5.setText("No.Hp");
 
+        TxtKodesup.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                TxtKodesupCaretUpdate(evt);
+            }
+        });
         TxtKodesup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TxtKodesupActionPerformed(evt);
@@ -74,6 +79,11 @@ public class FormDataSupplier extends javax.swing.JInternalFrame {
         });
 
         BtnAdd.setText("ADD");
+        BtnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAddActionPerformed(evt);
+            }
+        });
 
         BtnSave.setText("Save");
         BtnSave.addActionListener(new java.awt.event.ActionListener() {
@@ -83,10 +93,25 @@ public class FormDataSupplier extends javax.swing.JInternalFrame {
         });
 
         BtnEdit.setText("Edit");
+        BtnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEditActionPerformed(evt);
+            }
+        });
 
         BtnDelete.setText("DELETE");
+        BtnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnDeleteActionPerformed(evt);
+            }
+        });
 
         BtnClose.setText("CLOSE");
+        BtnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCloseActionPerformed(evt);
+            }
+        });
 
         TxtAlamatsup.setColumns(20);
         TxtAlamatsup.setRows(5);
@@ -182,7 +207,7 @@ public class FormDataSupplier extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 709, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -190,7 +215,7 @@ public class FormDataSupplier extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(214, Short.MAX_VALUE))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -200,15 +225,15 @@ public class FormDataSupplier extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(129, 129, 129)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(20, 20, 20))
         );
@@ -266,13 +291,136 @@ String kodesup=this.TxtKodesup.getText();
         
             Connection c=ClassDatabase.getkoneksi();
             Statement s= c.createStatement();
-            String sql="select kodesup, namasup, alamatsup, notelpsup from supplier";
+            String sql="select * from supplier";
             ResultSet r=s.executeQuery(sql);
             TblSup.setModel(DbUtils.resultSetToTableModel(r));
 }catch (Exception e){
 JOptionPane.showMessageDialog(null, e);
 }        // TODO add your handling code here:
     }//GEN-LAST:event_BtnSaveActionPerformed
+
+    private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
+ String kodesup=this.TxtKodesup.getText();
+    String namasup=this.TxtNamasup.getText();
+    String alamatsup=this.TxtAlamatsup.getText();
+    String notelpsup=this.TxtNotelpsup.getText();
+     if(TxtKodesup.getText().isEmpty()) 
+    {
+    JOptionPane.showMessageDialog(this, "Data Belum Lengkap, Kode Supplier Tidak Boleh Kosong");
+   }
+    else{
+    if (TxtNamasup.getText().isEmpty())
+    {
+        JOptionPane.showMessageDialog(this, "Data Belum Lengkap, Nama Supplier Tidak Boleh Kosong");
+    }
+    else{
+    if (TxtAlamatsup.getText().isEmpty())
+    {
+        JOptionPane.showMessageDialog(this, "Data Belum Lengkap, Alamat Tidak Boleh Kosong");
+    }
+    else{
+    if (TxtNotelpsup.getText().isEmpty())
+    {
+        JOptionPane.showMessageDialog(this, "Data Belum Lengkap, Nomor Telp Tidak Boleh Kosong");
+    }   
+    else{
+    try {
+            Connection c=ClassDatabase.getkoneksi();
+            String sql ="UPDATE `db_04tplp016`.`supplier` SET `namasup`=?,`alamatsup` = ?,`notelpsup`=? where kodesup=?";
+            PreparedStatement p=(PreparedStatement) c.prepareStatement(sql);
+            p.setString(4, kodesup);
+            p.setString(1, namasup);
+            p.setString(2, alamatsup);  
+            p.setString(3, notelpsup);
+            p.executeUpdate();
+            p.close();
+            JOptionPane.showMessageDialog(this, "Sukses Update Data");
+        }catch(SQLException e){
+            System.out.println(e);
+        }finally{
+            
+            
+      }}}}  }
+ try {        
+        
+            Connection c=ClassDatabase.getkoneksi();
+            Statement s= c.createStatement();
+            String sql="select kodesup,namasup, alamatsup, notelpsup from supplier";
+            ResultSet r=s.executeQuery(sql);
+            TblSup.setModel(DbUtils.resultSetToTableModel(r));
+}catch (Exception e){
+JOptionPane.showMessageDialog(null, e);
+}
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnEditActionPerformed
+
+    private void TxtKodesupCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_TxtKodesupCaretUpdate
+try {            
+            Connection c=ClassDatabase.getkoneksi();
+            Statement s= c.createStatement();
+            String sql="Select * from supplier where kodesup='" + this.TxtKodesup.getText() + "'";
+            ResultSet r=s.executeQuery(sql);
+           while (r.next()){
+                this.TxtNamasup.setText(r.getString(2));              
+                this.TxtAlamatsup.setText(r.getString("alamatsup"));
+                this.TxtNotelpsup.setText(r.getString("notelpsup")); 
+            }
+            r.close();
+            s.close();
+            
+        }catch(SQLException e) {
+            System.out.println("Terjadi kesalahan" + e);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtKodesupCaretUpdate
+
+    private void BtnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDeleteActionPerformed
+String kodesup=this.TxtKodesup.getText();
+    
+    try {
+            Connection c=ClassDatabase.getkoneksi();
+            String sql = "Delete from supplier Where kodesup=?";
+            PreparedStatement p=(PreparedStatement) c.prepareStatement(sql);
+            p.setString(1, kodesup);          
+           
+            p.executeUpdate();
+            p.close();
+            JOptionPane.showMessageDialog(this, "Sukses Hapus Data");
+        }catch(SQLException e){
+            System.out.println(e);
+        }finally{
+        }
+     try {        
+        
+            Connection c=ClassDatabase.getkoneksi();
+            Statement s= c.createStatement();
+            String sql="select * from supplier";
+            ResultSet r=s.executeQuery(sql);
+            TblSup.setModel(DbUtils.resultSetToTableModel(r));
+}catch (Exception e){
+JOptionPane.showMessageDialog(null, e);
+}
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnDeleteActionPerformed
+
+    private void BtnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCloseActionPerformed
+ int ex = JOptionPane.showConfirmDialog(null, "Apakah anda akan keluar? ", "Anda yakin?",
+        JOptionPane.YES_NO_OPTION);
+        if (ex == 0) {
+            dispose();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnCloseActionPerformed
+
+    private void BtnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAddActionPerformed
+  TxtKodesup.setText("");
+        TxtNamasup.setText("");
+        TxtAlamatsup.setText("");
+        TxtNotelpsup.setText("");
+        TxtKodesup.requestFocus();
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnAddActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
