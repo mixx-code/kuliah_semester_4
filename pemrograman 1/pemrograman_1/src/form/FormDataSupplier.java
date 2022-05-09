@@ -413,7 +413,7 @@ JOptionPane.showMessageDialog(null, e);
     }//GEN-LAST:event_BtnCloseActionPerformed
 
     private void BtnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAddActionPerformed
-  TxtKodesup.setText("");
+        TxtKodesup.setText("");
         TxtNamasup.setText("");
         TxtAlamatsup.setText("");
         TxtNotelpsup.setText("");
