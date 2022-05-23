@@ -202,7 +202,7 @@ main()
         cout<<endl;
         cout<<"  _____________________________"<<endl;
         cout<<" |                             |"<<endl;
-        cout<<" |       PERTEMUAN KE 7        |"<<endl;
+        cout<<" |             menu            |"<<endl;
         cout<<"  _____________________________"<<endl;
         cout<<" |  1. Shell Sort(menaik)      |"<<endl;
         cout<<" |  2. Shell Sort(menurun)     |"<<endl;
