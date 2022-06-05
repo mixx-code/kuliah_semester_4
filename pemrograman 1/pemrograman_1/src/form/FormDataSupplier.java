@@ -348,6 +348,7 @@ public class FormDataSupplier extends javax.swing.JInternalFrame {
                         }}}}  }
                         try {
 
+<<<<<<< HEAD
                             Connection c=ClassDatabase.getkoneksi();
                             Statement s= c.createStatement();
                             String sql="select * from supplier";
@@ -412,6 +413,9 @@ public class FormDataSupplier extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BtnsaveActionPerformed
 
     private void BtnaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnaddActionPerformed
+=======
+    private void BtnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAddActionPerformed
+>>>>>>> c51ff847ed80f23be63b4cc8af2fc4d301c384b6
         TxtKodesup.setText("");
         TxtNamasup.setText("");
         TxtAlamatsup.setText("");

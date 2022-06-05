@@ -51,6 +51,12 @@ public class form_login extends javax.swing.JFrame {
 
         jLabel3.setText("password");
 
+        TxtUsername.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtUsernameActionPerformed(evt);
+            }
+        });
+
         BtnLogin.setText("login");
         BtnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,6 +177,10 @@ int ex = JOptionPane.showConfirmDialog(null, "Apakah anda akan keluar? ", "Anda 
             dispose();
         }        // TODO add your handling code here:
     }//GEN-LAST:event_BtnLogoutActionPerformed
+
+    private void TxtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtUsernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtUsernameActionPerformed
 
     /**
      * @param args the command line arguments
