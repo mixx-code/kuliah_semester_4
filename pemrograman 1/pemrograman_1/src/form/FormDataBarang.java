@@ -48,11 +48,11 @@ public class FormDataBarang extends javax.swing.JInternalFrame {
         Txthargajual = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         Txtstoke = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        BtnAdd = new javax.swing.JButton();
         BtnSave = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        BtnEdit = new javax.swing.JButton();
+        BtnDelete = new javax.swing.JButton();
+        BtnClose = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblbarang = new javax.swing.JTable();
@@ -77,7 +77,12 @@ public class FormDataBarang extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Stoke");
 
-        jButton1.setText("ADD");
+        BtnAdd.setText("ADD");
+        BtnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAddActionPerformed(evt);
+            }
+        });
 
         BtnSave.setText("SAVE");
         BtnSave.addActionListener(new java.awt.event.ActionListener() {
@@ -86,11 +91,16 @@ public class FormDataBarang extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton3.setText("EDIT");
+        BtnEdit.setText("EDIT");
+        BtnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEditActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("DELETE");
+        BtnDelete.setText("DELETE");
 
-        jButton5.setText("CLOSE");
+        BtnClose.setText("CLOSE");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -112,17 +122,17 @@ public class FormDataBarang extends javax.swing.JInternalFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton1)
+                        .addComponent(BtnAdd)
                         .addGap(18, 18, 18)
                         .addComponent(BtnSave)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3)
+                        .addComponent(BtnEdit)
                         .addGap(26, 26, 26)
-                        .addComponent(jButton4)
+                        .addComponent(BtnDelete)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton5)
+                        .addComponent(BtnClose)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -161,11 +171,11 @@ public class FormDataBarang extends javax.swing.JInternalFrame {
                     .addComponent(jLabel6))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(BtnAdd)
                     .addComponent(BtnSave)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5))
+                    .addComponent(BtnEdit)
+                    .addComponent(BtnDelete)
+                    .addComponent(BtnClose))
                 .addContainerGap(70, Short.MAX_VALUE))
         );
 
@@ -281,18 +291,94 @@ JOptionPane.showMessageDialog(null, e);
 }        // TODO add your handling code here:
     }//GEN-LAST:event_BtnSaveActionPerformed
 
+    private void BtnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAddActionPerformed
+    Txtkodebarang.setText("");
+        Txtnamabarang.setText("");
+        Txthargabeli.setText("");
+        Txthargajual.setText("");
+        Txtstoke.setText("");
+        Txtkodebarang.requestFocus();    // TODO add your handling code here:
+    }//GEN-LAST:event_BtnAddActionPerformed
+
+    private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
+    String kodebarang=this.Txtkodebarang.getText();
+    String namabarang=this.Txtnamabarang.getText();
+    String hargabeli=this.Txthargabeli.getText();
+    String hargajual=this.Txthargajual.getText();
+    String stoke=this.Txtstoke.getText();
+     if(Txtkodebarang.getText().isEmpty()) 
+    {
+    JOptionPane.showMessageDialog(this, "Data Belum Lengkap, Kode Supplier Tidak Boleh Kosong");
+   }
+    else{
+    if (Txtnamabarang.getText().isEmpty())
+    {
+        JOptionPane.showMessageDialog(this, "Data Belum Lengkap, Nama barang Tidak Boleh Kosong");
+    }
+    else{
+    if (Txthargabeli.getText().isEmpty())
+    {
+        JOptionPane.showMessageDialog(this, "Data Belum Lengkap, harga beli Tidak Boleh Kosong");
+    }
+    else{
+    if (Txthargajual.getText().isEmpty())
+    {
+        JOptionPane.showMessageDialog(this, "Data Belum Lengkap, harga jual Telp Tidak Boleh Kosong");
+    }
+    else{
+    if (Txtstoke.getText().isEmpty())
+    {
+        JOptionPane.showMessageDialog(this, "Data Belum Lengkap, stoke Telp Tidak Boleh Kosong");
+    } 
+    
+    else{
+    try {
+            Connection c=ClassDatabase.getkoneksi();
+            String sql ="UPDATE `servicedb`.`barang` SET `namabarang`=?,`hargabeli` = ?,`hargajual`=?,`stoke`=? where kodebarang=?";
+        try (PreparedStatement p = (PreparedStatement) c.prepareStatement(sql)) {
+            p.setString(5, Txtkodebarang);
+            p.setString(1, Txtnamabarang);
+            p.setString(2, Txthargabeli);  
+            p.setString(3, Txthargajual);
+            p.setString(4, Txthargajual);
+            p.executeUpdate();
+        }
+            JOptionPane.showMessageDialog(this, "Sukses Update Data");
+        }catch(SQLException e){
+            System.out.println(e);
+        }finally{
+            
+            
+      }
+    }
+    }
+    }
+    } 
+    }
+ try {        
+        
+            Connection c=ClassDatabase.getkoneksi();
+            Statement s= c.createStatement();
+            String sql="select * from barang";
+            ResultSet r=s.executeQuery(sql);
+            tblbarang.setModel(DbUtils.resultSetToTableModel(r));
+}catch (Exception e){
+JOptionPane.showMessageDialog(null, e);
+}    // TODO add your handling code here:
+    }//GEN-LAST:event_BtnEditActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnAdd;
+    private javax.swing.JButton BtnClose;
+    private javax.swing.JButton BtnDelete;
+    private javax.swing.JButton BtnEdit;
     private javax.swing.JButton BtnSave;
     private javax.swing.JTextField Txthargabeli;
     private javax.swing.JTextField Txthargajual;
     private javax.swing.JTextField Txtkodebarang;
     private javax.swing.JTextField Txtnamabarang;
     private javax.swing.JTextField Txtstoke;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
