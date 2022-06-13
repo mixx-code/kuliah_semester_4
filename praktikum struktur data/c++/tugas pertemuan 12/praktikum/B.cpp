@@ -86,6 +86,8 @@ void POP (Stack &S, char &Hsl)
  }
  else
  cout<<"Stack Kosong…..";
+
+
 }
 //=================end of file==================
 
@@ -218,7 +220,7 @@ main()
     int n;
     do{
     system("cls");
-    cout << "Menu Pilihan Metode Pengurutan Data"<<endl;
+    cout << "Menu Pilihan menggunakan if else"<<endl;
     cout << "1. Stack dengan menggunakan Array"<<endl;
     cout << "2. Singly Linked List"<<endl;
     cout << "Masukan Nomer Menu Yang Di Inginkan"<<endl;
