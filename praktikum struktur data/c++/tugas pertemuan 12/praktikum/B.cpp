@@ -90,55 +90,6 @@ void POP (Stack &S, char &Hsl)
 //=================end of file==================
 
 /////////////////////////////////////////////////////////////
-using namespace std;
-#define Maxs 50
-struct Tumpukan{
-    char Isi[Maxs];
-    int Atas;
-}T;
-
-void PUSH(char x){
-    if(T.Atas==Maxs){
-        cout<<"Stack Penuh...";
-        getch();
-    }else{
-    //  T.Atas++;
-        T.Atas=T.Atas+1;
-        T.Isi[T.Atas]=x;
-    }
-}
-char POP(){
-    char hasil;
-    if(T.Atas==0){
-        cout<<"Stack kosong....";
-        hasil=' ';
-    }else{
-        hasil=T.Isi[T.Atas];
-        T.Atas=T.Atas-1;
-    }
-    return hasil;
-}
-//program utama
-void balikKarakter()
-{
-char kalimat[Maxs];
-T.Atas=0;
-cout<<"========Membalik Kalimat=======\n\n";
-
-cout<<"Masukan Sebuah Kalimat: ";
-cin.getline(kalimat,1000);
-cout<<"Kalimat Asli: "<<kalimat;
-
-for(int i=0; i<strlen(kalimat); i++){
-    PUSH(kalimat[i]);
-}
-cout<<"\nKalimat Setelah Dibalik: ";
-//mem POP sekaligus mencetak Stack
-for(int i=0; i<strlen(kalimat); i++){
-    cout<<""<<POP();
-}
-getch();
-}
 
 /////////////////////////////////////////////////////////////
 
@@ -269,15 +220,12 @@ main()
     system("cls");
     cout << "Menu Pilihan Metode Pengurutan Data"<<endl;
     cout << "1. Stack dengan menggunakan Array"<<endl;
-    cout << "2. Membalik karakter"<<endl;
-    cout << "3. Singly Linked List"<<endl;
+    cout << "2. Singly Linked List"<<endl;
     cout << "Masukan Nomer Menu Yang Di Inginkan"<<endl;
     cin >> n;
     if(n==1){
         stackArray();
     }else if(n==2){
-        balikKarakter();
-    }else if(n==3){
         SinglyLinkedList();
     }else{
         system("cls");
